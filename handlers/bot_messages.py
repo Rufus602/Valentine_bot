@@ -7,7 +7,6 @@ router = Router()
 
 @router.edited_message()
 async def editing_messages(message: Message, db: MDB) -> None:
-    print("in bot_messages")
     user = await db.users.find_one({"_id": message.from_user.id})
     if user["status"] == 2:
         if message.text:
@@ -75,7 +74,6 @@ async def editing_messages(message: Message, db: MDB) -> None:
     )
 )
 async def echo(message: Message, db: MDB) -> None:
-    print("In bot messages")
 
     user = await db.users.find_one({"_id": message.from_user.id})
 

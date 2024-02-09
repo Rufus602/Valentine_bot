@@ -52,7 +52,6 @@ async def change_input_settings(query: CallbackQuery, callback_data: MaterialSet
     elif callback_data.value == "receive_voice_toggle":
         await db.allowance.update_one(condition, {"$set": {"voice": not allow["voice"]}})
         allow["voice"] = not allow["voice"]
-    print(allow)
     with suppress(TelegramBadRequest):
         await query.message.edit_reply_markup(
         reply_markup=inline_builder(

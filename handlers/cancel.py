@@ -8,7 +8,6 @@ router = Router()
 
 @router.message(or_f(Command(commands=["cancel","leave", "stop"]), F.text == "❌ Прекратить"))
 async def cmd_cancel(message: types.Message, db: MDB, state: FSMContext) -> None:
-    print("in cancel")
     user = await db.users.find_one({"_id": message.from_user.id})
     if user["status"] == 2:
         await message.reply("*💬 Ты покинул чат!*")

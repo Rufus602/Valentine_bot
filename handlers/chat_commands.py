@@ -10,7 +10,6 @@ router = Router()
 
 @router.message(or_f(Command("search"), F.text == "☕ Искать собеседника"))
 async def search_interlocutor(message: Message, db: MDB) -> None:
-    print("in messaging")
     user = await db.users.find_one({"_id": message.from_user.id})
     pattern = {
         "text": (
@@ -58,7 +57,6 @@ async def search_interlocutor(message: Message, db: MDB) -> None:
 
 @router.message(Command("next"))
 async def next_interlocutor(message: Message, db: MDB) -> None:
-    print("in next")
     user = await db.users.find_one({"_id": message.from_user.id})
     if user["status"] == 2:
         await message.bot.send_message(

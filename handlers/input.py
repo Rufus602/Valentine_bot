@@ -13,7 +13,6 @@ router = Router()
 async def setting(message: Message, db: MDB):
     await db.users.update_one({"_id": message.from_user.id}, {"$set": {"status": 0}})
     allow = await db.allowance.find_one({"user_id": message.from_user.id}, {"_id": 0, "user_id": 0})
-    print("in input settings")
     await message.reply(
         f"Привет, *{message.from_user.first_name}*\!",
         reply_markup=inline_builder(
